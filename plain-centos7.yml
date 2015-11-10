@@ -1,5 +1,5 @@
 ---
-- hosts: gitbucket
+- hosts: plain-centos7
   sudo: yes
   roles:
     - yum-systemupdate
