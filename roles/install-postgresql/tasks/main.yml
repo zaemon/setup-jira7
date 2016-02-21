@@ -18,3 +18,7 @@
 - name: start postgresql
   service: name=postgresql-9.5 state=started  enabled=yes
   become: yes
+- name: create database for jira
+  command: /usr/pgsql-9.5/bin/createdb jiradb
+  become: yes
+  become_user: postgres
