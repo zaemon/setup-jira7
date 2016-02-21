@@ -1,3 +1,6 @@
 - name: download jira7
   get_url: url=https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-7.1.0-jira-7.1.0-x64.bin
            dest=~/atlassian-jira-software-7.1.0-jira-7.1.0-x64.bin
+- name: chmod+x
+  file: path=~/atlassian-jira-software-7.1.0-jira-7.1.0-x64.bin
+        mode=u+x
