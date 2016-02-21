@@ -9,7 +9,7 @@
     - postgresql95-contrib
   become: yes
 - name: initialize db
-  command: /usr/pgsql-9.5/bin/initdb
+  command: /usr/pgsql-9.5/bin/initdb creates=/var/lib/pgsql/9.5/data/postgresql.conf
   ## PGDATAの値は  /usr/lib/systemd/system/postgresql-9.5.service に書かれているデフォルトのPGDATAディレクトリー
   environment:
     PGDATA: /var/lib/pgsql/9.5/data
