@@ -1,24 +1,34 @@
 - name: install postgresql repository
   yum: name=https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm state=present
   become: yes
+
 - name: install postgresql packages
   yum: name="{{ item }}" state=latest
   with_items:
     ## serverインストールでクライアント、libsが勝手にインストールされる
     - postgresql95-server
     - postgresql95-contrib
+    ## ansibleでpostgresqlをモジュール化するのに必要
+    - python-psycopg2
   become: yes
-- name: initialize db
-  command: /usr/pgsql-9.5/bin/initdb creates=/var/lib/pgsql/9.5/data/postgresql.conf
+
+- name: initialize database
+  command: /usr/pgsql-9.5/bin/initdb
+           creates=/var/lib/pgsql/9.5/data/postgresql.conf
   ## PGDATAの値は  /usr/lib/systemd/system/postgresql-9.5.service に書かれているデフォルトのPGDATAディレクトリー
   environment:
     PGDATA: /var/lib/pgsql/9.5/data
+  ## initdbはpostgresユーザーで実施
   become: yes
   become_user: postgres
+
 - name: start postgresql
   service: name=postgresql-9.5 state=started  enabled=yes
   become: yes
+
+- name: create database user for jira
+  postgresql_user: name=jira
+
 - name: create database for jira
-  command: /usr/pgsql-9.5/bin/createdb jiradb
-  become: yes
-  become_user: postgres
+  postgresql_db: name=jiradb
+                 owner=jira
