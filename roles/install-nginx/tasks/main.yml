@@ -1,0 +1,6 @@
+- name: install repository
+  yum: name=http://nginx.org/packages/rhel/7/noarch/RPMS/nginx-release-rhel-7-0.el7.ngx.noarch.rpm state=present
+  become: yes
+- name: install nginx
+  yum: name=nginx state=latest
+  become: yes
