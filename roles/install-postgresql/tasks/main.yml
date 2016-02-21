@@ -1,8 +1,11 @@
+- name: install postgresql repository
+  yum: name=https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm state=present
+  become: yes
 - name: install postgresql packages
   yum: name="{{ item }}" state=latest
   with_items:
-    - postgresql
-    - postgresql-server
-    - postgresql-libs
-    - postgresql-contrib
+    - postgresql95
+    - postgresql95-server
+    - postgresql95-libs
+    - postgresql95-contrib
   become: yes
