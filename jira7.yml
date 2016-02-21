@@ -4,3 +4,4 @@
     - yum-systemupdate
     - install-nginx
     - install-postgresql
+    - install-jira7
