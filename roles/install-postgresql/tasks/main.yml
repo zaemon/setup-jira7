@@ -1,0 +1,2 @@
+- name: install postgresql package
+  yum: name=postgresql state=latest

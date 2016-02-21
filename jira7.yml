@@ -3,3 +3,4 @@
   sudo: yes
   roles:
     - yum-systemupdate
+    - install-postgresql
