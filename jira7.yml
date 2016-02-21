@@ -1,5 +1,6 @@
 ---
 - hosts: jira7
-  sudo: yes
   roles:
     - yum-systemupdate
+    - install-nginx
+    - install-postgresql

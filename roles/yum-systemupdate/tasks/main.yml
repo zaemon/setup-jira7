@@ -1,8 +1,12 @@
 - name: install epel
   yum: name=epel-release state=latest
+  become: yes
 - name: install selinux-python
   yum: name=libselinux-python
+  become: yes
 - name: enable epel repository
   replace: dest=/etc/yum.repos.d/epel.repo regexp="enabled *= *0" replace="enabled=1"
+  become: yes
 - name: yum update
   yum: name=* state=latest
+  become: yes
