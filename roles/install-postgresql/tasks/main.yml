@@ -4,8 +4,17 @@
 - name: install postgresql packages
   yum: name="{{ item }}" state=latest
   with_items:
-    - postgresql95
+    ## serverインストールでクライアント、libsが勝手にインストールされる
     - postgresql95-server
-    - postgresql95-libs
     - postgresql95-contrib
+  become: yes
+- name: initialize db
+  command: /usr/pgsql-9.5/bin/initdb
+  ## PGDATAの値は  /usr/lib/systemd/system/postgresql-9.5.service に書かれているデフォルトのPGDATAディレクトリー
+  environment:
+    PGDATA: /var/lib/pgsql/9.5/data
+  become: yes
+  become_user: postgres
+- name: start postgresql
+  service: name=postgresql-9.5 state=started  enabled=yes
   become: yes
