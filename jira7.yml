@@ -1,5 +1,5 @@
 ---
-- hosts: plain-centos7
+- hosts: jira7
   sudo: yes
   roles:
     - yum-systemupdate
